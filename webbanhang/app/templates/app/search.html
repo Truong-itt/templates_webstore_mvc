@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% load static %}
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        {% block search %}
+        {% comment %} <h5>Result search for {{searched}}</h5>
+        {% for key in keys %}
+        {{key}} 
+        <br />
+        {% endfor %}
+        <script src="" async defer></script> {% endcomment %}
+        {% for product in keys%}
+        <div class="col-lg-3">
+            <img class="thumbnail" src="{{product.ImageURL}}" >
+            <div class="box-element product">
+                <h6><Strong>{{product.name}}</Strong></h6>
+                <hr>
+                <button data-product={{product.id}} data-action="add" class="btn btn-outline-secondary add-btn update-cart">Add to cart</button>
+                <a class="btn btn-outline-sucess" href="{% url 'view' %}?id={{product.id}}">Views</a>
+                <h4 style="display: inline-block; float: right;"><strong>${{product.price | floatformat:2}}</strong></h4>
+            </div>
+        </div>
+        {% endfor%}
+        
+        {% endblock search %}
+    </body>
+</html>

@@ -1,0 +1,82 @@
+
+connect and create a new db
+import mysql.connector
+# Kết nối đến MySQL
+db = mysql.connector.connect(user='root', password='123456', host='localhost')
+
+# Tạo một đối tượng cursor
+mycursor = db.cursor()
+database_name = 'TEST1'
+code = f"create SCHEMA {database_name};"  tuong tu xoa thi drop
+# Thực hiện câu lệnh SQL
+mycursor.execute(code)
+# Commit thay đổi
+db.commit()
+# Đóng kết nối
+db.close()
+
+
+toa bang 
+CREATE TABLE `test1`.`table1` (
+  `id` INT NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `year` INT NULL,
+  PRIMARY KEY (`id`));
+
+
+them data vao bang 
+INSERT INTO `test1`.`table1` (`id`, `name`, `year`) VALUES ('1', 'truong', '2004');
+
+
+
+
+neu dang o database do thi khong can them test1 vao code
+import mysql.connector
+db = mysql.connector.connect(user='root', password='123456', host='localhost',database='test1')
+mycursor = db.cursor()
+database_name = 'TEST1'
+code = "INSERT INTO `table1` (`id`, `name`, `year`) VALUES ('2', 'trong', '2004');"
+mycursor.execute(code)
+db.commit()
+db.close()
+
+
+xoa di data trong bang 
+import mysql.connector
+db = mysql.connector.connect(user='root', password='123456', host='localhost',database='test1')
+mycursor = db.cursor()
+code = "DELETE FROM table1  WHERE id = 1"
+mycursor.execute(code)
+db.commit()
+db.close()
+
+
+
+
+them cung luc nhieu data
+import mysql.connector
+db = mysql.connector.connect(user='root', password='123456', host='localhost',database='test1')
+mycursor = db.cursor()
+code = "INSERT INTO `table1` (`id`, `name`, `year`) VALUES (%s,%s,%s);"
+val = [
+    ('3','bro','2000'),
+    ('4','bro2','2000'),
+    ('5','bro3','2000'),
+]
+for item in val:
+    mycursor.execute(code,item)
+db.commit()
+db.close()
+
+
+m va luu va dong trong mysql 
+db.commit()
+db.close()
+
+
+{% static 'app/images/placeholder.png'%} cach su dung khi truyen hinh anh vao web
+truyen data co tu database
+{{product.name}} 
+truyen url 
+{% url 'home' %}
+{% static 'images/giohang.jpg'%}
